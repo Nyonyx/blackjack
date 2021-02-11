@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/background/bg1.png</File>
+    <File>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/background/bg2.png</File>
+    <File>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/background/bg3.png</File>
+    <File>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/background/bg4.png</File>
+    <File>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/leather/Leather1.png</File>
+    <File>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/leather/Leather2.png</File>
+    <File>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/leather/Leather3.png</File>
+    <File>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/leather/Leather4.png</File>
+    <File>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/leather/Leather5.png</File>
+    <File>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/table/allcards.png</File>
+    <File>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/table/cardBox.png</File>
+    <File>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/table/chips.png</File>
+    <File>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/table/table1.png</File>
+    <File>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/table/table2.png</File>
+    <File>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/table/table3.png</File>
+    <File>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/table/table4.png</File>
+    <File>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/table/textLines.png</File>
+    <File>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/UI/backBtn.png</File>
+    <File>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/UI/blueBG.png</File>
+    <File>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/UI/borderCircle.png</File>
+    <File>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/UI/button.png</File>
+    <File>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/UI/button1.png</File>
+    <File>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/UI/settingsBtn.png</File>
+    <File>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/UI/slider3.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>

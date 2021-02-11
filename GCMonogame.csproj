@@ -12,32 +12,33 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " />
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' "/>
   <ItemGroup>
-    <None Remove="Icon.ico" />
-    <None Remove="Icon.bmp" />
-    <None Remove="Content\PixelMaster.spritefont" />
-    <None Remove="Content\PixelMaster.ttf" />
-    <None Remove="Content\MainFont.spritefont" />
-    <None Remove="Content\File.spritefont" />
-    <None Remove="Content\Fil.spritefont" />
-    <None Remove="Content\Content.mgcb" />
+    <None Remove="Icon.ico"/>
+    <None Remove="Icon.bmp"/>
+    <None Remove="Content\PixelMaster.spritefont"/>
+    <None Remove="Content\PixelMaster.ttf"/>
+    <None Remove="Content\MainFont.spritefont"/>
+    <None Remove="Content\File.spritefont"/>
+    <None Remove="Content\Fil.spritefont"/>
+    <None Remove="Content\Content.mgcb"/>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Icon.ico" />
-    <EmbeddedResource Include="Icon.bmp" />
+    <EmbeddedResource Include="Icon.ico"/>
+    <EmbeddedResource Include="Icon.bmp"/>
   </ItemGroup>
   <ItemGroup>
-    <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
+    <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false"/>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SpriteFontPlus.MonoGame" Version="0.7.0.22" />
-    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
+    <PackageReference Include="SpriteFontPlus.MonoGame" Version="0.7.0.22"/>
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641"/>
+    <PackageReference Include="MonoGame.Content.Builder.Task" Version="*"/>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Gamecodeur\" />
+    <Folder Include="Gamecodeur\"/>
   </ItemGroup>
   <ItemGroup>
-    <MonoGameContentReference Include="Content\Content.mgcb" />
+    <MonoGameContentReference Include="Content\Content.mgcb"/>
   </ItemGroup>
 </Project>
