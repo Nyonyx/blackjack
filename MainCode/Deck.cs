@@ -30,10 +30,6 @@ namespace GCMonogame
                     }
                 }              
             }
-            foreach (var c in cards)
-            {
-                //Console.WriteLine("{0},{1}",c.number,c.color);
-            }
         }
         public Card pickup(){
             int index = random.Next(cards.Count);
@@ -44,18 +40,3 @@ namespace GCMonogame
     }
     
 }
-
-        // public void shuffle(){
-
-        //     int index1;
-        //     int index2;
-        //     Card c;
-        //     for (int i = 0; i < 52*12; i++)
-        //     {
-        //         index1 = random.Next(cards.Count);
-        //         index2 = random.Next(cards.Count);
-        //         c = cards[index1];
-        //         cards.RemoveAt(index1);
-        //         cards.Insert(index2,c);
-        //     }
-        // }

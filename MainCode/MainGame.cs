@@ -11,7 +11,6 @@ namespace GCMonogame
     {
         private GraphicsDeviceManager _graphics;
         public SpriteBatch _spriteBatch;
-        public GameState gameState;
 
         public MainGame()
         {
@@ -28,8 +27,9 @@ namespace GCMonogame
             _graphics.PreferredBackBufferHeight = (int)(1563*0.6f);
             //_graphics.IsFullScreen = true;
             _graphics.ApplyChanges();
-            gameState = new GameState(this);
-            gameState.ChangeScene(GameState.SceneType.Menu);
+  
+
+  
             IsMouseVisible = true;
             
             base.Initialize();
@@ -49,11 +49,6 @@ namespace GCMonogame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-            if (gameState.CurrentScene != null)
-            {
-                gameState.CurrentScene.Update(gameTime);
-            }
 
             base.Update(gameTime);
         }
@@ -62,11 +57,9 @@ namespace GCMonogame
         {
             GraphicsDevice.Clear(Color.Black);
             _spriteBatch.Begin();
-            // TODO: Add your drawing code here
-            if (gameState.CurrentScene != null)
-            {
-                gameState.CurrentScene.Draw(gameTime);
-            }
+
+
+
             _spriteBatch.End();
 
             base.Draw(gameTime);

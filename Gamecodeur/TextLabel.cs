@@ -25,11 +25,6 @@ namespace Gamecodeur{
             pSpriteBatch.DrawString(AssetManager.MainFont,label,Position-offset,Color.White);
         }
 
-        public void TouchedBy(IActor pBy)
-        {
-            
-        }
-
         public void Update(GameTime pGameTime)
         {
             if (isCenter){

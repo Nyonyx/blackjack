@@ -9,12 +9,9 @@ namespace GCMonogame
     public class Hand{
         public List<Card> lst_cards;
  
-        public Hand(SceneGameplay pboard,Vector2 pPosition) {
+        public Hand(Vector2 pPosition) {
            
         }
-
-
-
         // return number of points of hand
         public int examine(){
             int points = 0;

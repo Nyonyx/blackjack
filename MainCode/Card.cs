@@ -31,12 +31,11 @@ namespace GCMonogame
 
         public cardNumber number;
         public cardColor color;
-        public Rectangle quadFace;
-        public Rectangle quadBack;
+        private Rectangle quadFace;
+        private Rectangle quadBack;
         private Rectangle currentQuad;
         public bool is_spinning {get ; private set;}
         private float spin_speed = 0.035f;
-        public Vector2 stopPosition = new Vector2(0,0);
         public bool is_moving;
 
         public Card(Texture2D pTexture,cardNumber pNumber,cardColor pColor) : base(pTexture){
@@ -71,13 +70,12 @@ namespace GCMonogame
                 this.scaling = new Vector2(this.scaling.X - spin_speed,this.scaling.Y);
             }
 
-            if (Position.Y > stopPosition.Y){
-                is_moving = false;
-                vx = 0;
-                vy = 0;
-                Position = new Vector2(stopPosition.X,stopPosition.Y);
-                spin();
-            }
+            //if (Position.Y > stopPosition.Y){
+                //is_moving = false;
+                //vx = 0;
+                //vy = 0;
+                //spin();
+            //}
 
 
             base.Update(pGameTime);
