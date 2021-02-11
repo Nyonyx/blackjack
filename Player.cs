@@ -22,23 +22,8 @@ namespace GCMonogame
             money = pMoney;
         }
 
-        public void addHand(Hand pHand){
-            if (lst_hands.Count < 4){
-                lst_hands.Add(pHand);
-                pHand.position = position;
-            }
-        }
-
         public void hit(Button pButton){
-            Card c = lst_hands[0].addCard();
-        }
-        public void bet(Button pButton){
-            board.setState(Turnstate.GiveCards);
-            money -= board.potentialBet;
-        }
-
-        public void stand(Button pButton){
-            board.setState(Turnstate.CroupierTurn);
+         
         }
     }
 }
