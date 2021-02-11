@@ -65,6 +65,7 @@ namespace GCMonogame
             state = pT;
         }
         public void init(){
+            //Test Commit
             allmovingcards = new List<Card>();
             state = Turnstate.Mise;
             deck = new Deck();
