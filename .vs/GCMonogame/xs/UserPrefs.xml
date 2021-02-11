@@ -1,0 +1,30 @@
+﻿<Properties StartupConfiguration="{23C799FE-ED5D-45C4-B6D2-D9929C702529}|Default">
+  <MonoDevelop.Ide.ItemProperties.GCMonogame PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="SceneGameplay.cs">
+    <Files>
+      <File FileName="MainGame.cs" Line="1" Column="17" />
+      <File FileName="Gamecodeur/GameState.cs" />
+      <File FileName="Gamecodeur/Scene.cs" />
+      <File FileName="Gamecodeur/AssetManager.cs" />
+      <File FileName="SceneGameplay.cs" Line="179" Column="31" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="GCMonogame" expanded="True" selected="True">
+            <Node name="GCMonogame" expanded="True">
+              <Node name="Content" expanded="True" />
+              <Node name="Gamecodeur" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
