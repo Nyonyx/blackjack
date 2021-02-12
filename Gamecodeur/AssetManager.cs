@@ -19,6 +19,7 @@ namespace Gamecodeur
         public static Texture2D[] leather = new Texture2D[5];
         public static Texture2D cardBox;
         public static Texture2D[] background = new Texture2D[4];
+        public static Texture2D chips;
 
         public static Texture2D circleBoard;
 
@@ -29,6 +30,8 @@ namespace Gamecodeur
             MainFont = fontBakeResult.CreateSpriteFont(pGraphicsDevice);
             imgCard =  pContent.Load<Texture2D>("table/allcards");    
             cardBox = pContent.Load<Texture2D>("table/cardBox");
+            chips = pContent.Load<Texture2D>("table/chips");
+            
             for (int i = 0; i < table.Length; i++)
             {
                 table[i] = pContent.Load<Texture2D>("table/table"+(i+1));

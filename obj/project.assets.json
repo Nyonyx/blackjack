@@ -203,11 +203,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/GCMonogame.csproj",
+      "projectUniqueName": "/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/GCMonogame.csproj",
       "projectName": "GCMonogame",
-      "projectPath": "/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/GCMonogame.csproj",
+      "projectPath": "/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/GCMonogame.csproj",
       "packagesPath": "/Users/brunopierrebouchard/.nuget/packages/",
-      "outputPath": "/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/obj/",
+      "outputPath": "/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"

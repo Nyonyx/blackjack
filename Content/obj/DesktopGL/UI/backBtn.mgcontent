@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/UI/backBtn.png</SourceFile>
+  <SourceFile>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/UI/backBtn.png</SourceFile>
   <SourceTime>2020-02-18T04:54:48-05:00</SourceTime>
-  <DestFile>/Volumes/Fichiers_Bruno-Pierre/Formation Gamecodeur/BlackJack Master project/BlackJackMaster/Content/bin/DesktopGL/UI/backBtn.xnb</DestFile>
-  <DestTime>2021-02-10T16:10:28-05:00</DestTime>
+  <DestFile>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/bin/DesktopGL/UI/backBtn.xnb</DestFile>
+  <DestTime>2021-02-11T18:14:36.907397-05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T11:35:14-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
