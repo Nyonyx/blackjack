@@ -7,32 +7,41 @@ namespace Gamecodeur{
 
     public delegate void OnClick(Button pSender);
 
-    public class Button : Sprite{
+    public class Button{
 
         public bool isHover{get;private set;}
         private MouseState oldMouseState;
         public OnClick onClick{get;set;}
         public string label {get;set;}
         public Sprite icon = null;
+        public Texture2D texture;
+        public Texture2D texturePressed;
+        public Texture2D currentTexture;
 
-        public Button(Texture2D pTexture) : base(pTexture){
-            label = "";
-            scaling = new Vector2(0.4f,0.4f);
-        }
-        public Button(Texture2D pTexture,string pLabel,Vector2 pPosition,OnClick pOnClick) : base(pTexture){
+        public Vector2 Position;
+        public Rectangle BoudingBox;
+        public Vector2 origin;
+        private Vector2 scaling;
+
+        public Button(Texture2D pTexture,Texture2D pTexturePressed,string pLabel,Vector2 pPosition,Vector2 pOrigin,Vector2 pScaling,OnClick pOnClick){
+            texture = pTexture;
+            texturePressed = pTexturePressed;
+            currentTexture = texture;
             label = pLabel;
-            scaling = new Vector2(0.4f,0.4f);
-            Position = pPosition;
             onClick = pOnClick;
+            Position = pPosition;
+            origin = pOrigin;
+            scaling = pScaling;
+            BoudingBox = new Rectangle((int)(Position.X-(origin.X*scaling.X)),
+            (int)(Position.Y-(origin.Y*scaling.Y)),(int)(texture.Width*scaling.X),
+            (int)(texture.Height*scaling.Y));
         }
 
         public void setIcon(Sprite pIcon){
             icon = pIcon;
         }
 
-        
-
-        public override void Update(GameTime pGameTime){
+        public void Update(GameTime pGameTime){
 
             MouseState newMouseState = Mouse.GetState();
             Point MousePos = newMouseState.Position;
@@ -42,9 +51,6 @@ namespace Gamecodeur{
                     isHover = true;
                 }
             }else {
-                if (isHover){
-          
-                }
                 isHover = false;
             }
 
@@ -55,18 +61,32 @@ namespace Gamecodeur{
                         onClick(this);
                     }
                 }
+
+                if (newMouseState.LeftButton == ButtonState.Pressed){
+                    currentTexture = texturePressed;
+
+                }else{
+                    currentTexture = texture;
+                }
             }
             oldMouseState = newMouseState;
-            base.Update(pGameTime);
         }
 
-        public override void Draw(SpriteBatch pSpriteBatch)
+        public void Draw(SpriteBatch pSpriteBatch)
         {
-            base.Draw(pSpriteBatch);
-            pSpriteBatch.DrawString(AssetManager.MainFont,label,Position,Color.White);
-            if (icon != null){
-                pSpriteBatch.Draw(icon.Texture,this.Position + (new Vector2(Texture.Width/2,Texture.Height/2)*this.scaling),null,Color.White,0,icon.origin,icon.scaling,icon.spriteEffect,1);
+            Vector2 press; 
+            if (currentTexture == texture){
+                press = new Vector2(0,0);
+            }else{
+                press = new Vector2(0,(texture.Height*scaling.Y)/10);
             }
+
+            pSpriteBatch.Draw(currentTexture,Position+press,null,Color.White,0,origin,scaling,SpriteEffects.None,1);
+            Vector2 size = AssetManager.MainFont.MeasureString(label);
+            pSpriteBatch.DrawString(AssetManager.MainFont,label,Position+press,Color.White,0,new Vector2(size.X/2,size.Y/2),scaling*2,SpriteEffects.None,1);
+            //if (icon != null){
+                //pSpriteBatch.Draw(icon.Texture,Position,null,Color.White,0,icon.origin,icon.scaling,icon.spriteEffect,1);
+            //}
         }
     }
 }

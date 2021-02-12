@@ -27,18 +27,19 @@ namespace GCMonogame
         hearts
     }
 
-    public class Card : Sprite{
+    public class Card {
 
         public cardNumber number;
         public cardColor color;
-        private Rectangle quadFace;
+        public Rectangle quadFace;
         private Rectangle quadBack;
         private Rectangle currentQuad;
         public bool is_spinning {get ; private set;}
         private float spin_speed = 0.035f;
         public bool is_moving;
+        public Vector2 position {get;private set;}
 
-        public Card(Texture2D pTexture,cardNumber pNumber,cardColor pColor) : base(pTexture){
+        public Card(cardNumber pNumber,cardColor pColor,Vector2 pPosition){
             this.number = pNumber;
             this.color = pColor;
             int lig = (int)pColor;
@@ -46,48 +47,13 @@ namespace GCMonogame
             quadFace = new Rectangle((14-col)*163,lig*238,163,238);
             quadBack = new Rectangle(0,4*238,163,238);
             currentQuad = quadBack;
-            scaling = new Vector2(GameState.scalingTable,GameState.scalingTable);
             //Console.WriteLine("Card add : {0},{1}",pNumber,pColor);
-            this.origin = new Vector2(quadFace.Width/2,quadFace.Height/2);
             is_moving = true;
+            position = pPosition;
         }
-        public override void Update(GameTime pGameTime)
-        {
-            bool changeQuad = false;
-            if (is_spinning){
-                if (this.scaling.X < 0){
-                    this.scaling = new Vector2(0,this.scaling.Y);
-                    spin_speed = -spin_speed;
-                    changeQuad = true;
-                }
-                if (this.scaling.X > GameState.scalingTable){
-                    this.scaling = new Vector2(GameState.scalingTable,this.scaling.Y);
-                    is_spinning = false;
-                }
-                if (changeQuad){
-                    currentQuad = quadFace; 
-                }
-                this.scaling = new Vector2(this.scaling.X - spin_speed,this.scaling.Y);
-            }
-
-            //if (Position.Y > stopPosition.Y){
-                //is_moving = false;
-                //vx = 0;
-                //vy = 0;
-                //spin();
-            //}
-
-
-            base.Update(pGameTime);
-        }
-        public override void Draw(SpriteBatch pSpriteBatch)
-        {
-
-            pSpriteBatch.Draw(this.Texture,this.Position,currentQuad,Color.White,0,this.origin,this.scaling,SpriteEffects.None,1);
+        public void setPosition(Vector2 pPosition){
+            position = pPosition;
         }
 
-        public void spin(){
-            is_spinning = true;
-        }
     }
 }

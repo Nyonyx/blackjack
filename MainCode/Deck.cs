@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Gamecodeur;
+using Microsoft.Xna.Framework;
 
 namespace GCMonogame
 {
@@ -9,7 +10,7 @@ namespace GCMonogame
         private Random random;
         private MainGame mainGame;
         public Deck(){ 
-            random = new Random();
+            random = new Random(System.DateTime.Now.Second);
             cards = new List<Card>();
 
             int nbCards = Enum.GetNames(typeof(cardNumber)).Length;
@@ -25,8 +26,8 @@ namespace GCMonogame
                 {
                     for (int i2 = 0; i2 < nbCards; i2++)
                     {  
-                        cards.Add(new Card(AssetManager.imgCard,(cardNumber)num.GetValue(i2),
-                        (cardColor)col.GetValue(i1)));
+                        cards.Add(new Card((cardNumber)num.GetValue(i2),
+                        (cardColor)col.GetValue(i1),new Vector2(0,0)));
                     }
                 }              
             }

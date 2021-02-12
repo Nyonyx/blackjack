@@ -22,6 +22,10 @@ namespace Gamecodeur
         public static Texture2D chips;
 
         public static Texture2D circleBoard;
+        public static Texture2D button1;
+        public static Texture2D button2;
+        public static Texture2D blueBG;
+        public static Texture2D settingsBtn;
 
         public static void Load(ContentManager pContent, GraphicsDevice pGraphicsDevice){
             var fontBakeResult = TtfFontBaker.Bake(File.ReadAllBytes("Content/PixelMaster.ttf"), 60, 1024, 1024, new[]
@@ -31,7 +35,11 @@ namespace Gamecodeur
             imgCard =  pContent.Load<Texture2D>("table/allcards");    
             cardBox = pContent.Load<Texture2D>("table/cardBox");
             chips = pContent.Load<Texture2D>("table/chips");
-            
+            button1 = pContent.Load<Texture2D>("UI/button1");
+            button2 = pContent.Load<Texture2D>("UI/button2");
+            blueBG = pContent.Load<Texture2D>("UI/blueBG");
+            settingsBtn = pContent.Load<Texture2D>("UI/settingsBtn");
+
             for (int i = 0; i < table.Length; i++)
             {
                 table[i] = pContent.Load<Texture2D>("table/table"+(i+1));

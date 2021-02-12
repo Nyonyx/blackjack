@@ -176,3 +176,4 @@
 /Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/obj/Debug/net5.0/ref/GCMonogame.dll
 /Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/obj/Debug/net5.0/GCMonogame.pdb
 /Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/obj/Debug/net5.0/GCMonogame.genruntimeconfig.cache
+/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/Content/UI/button2.xnb
