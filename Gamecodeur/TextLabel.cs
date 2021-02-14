@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Gamecodeur{
-    public class TextLabel : IActor{
+    public class TextLabel{
 
         string label;
         public TextLabel(string pLabel){

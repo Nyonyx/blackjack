@@ -31,12 +31,9 @@ namespace GCMonogame
 
         public cardNumber number;
         public cardColor color;
-        public Rectangle quadFace;
-        private Rectangle quadBack;
-        private Rectangle currentQuad;
-        public bool is_spinning {get ; private set;}
-        private float spin_speed = 0.035f;
-        public bool is_moving;
+        public Rectangle quadFace {get; private set;}
+        public Rectangle quadBack {get; private set;}
+        public Rectangle currentQuad {get; private set;}
         public Vector2 position {get;private set;}
 
         public Card(cardNumber pNumber,cardColor pColor,Vector2 pPosition){
@@ -44,16 +41,19 @@ namespace GCMonogame
             this.color = pColor;
             int lig = (int)pColor;
             int col = (int)pNumber;
+
             quadFace = new Rectangle((14-col)*163,lig*238,163,238);
-            quadBack = new Rectangle(0,4*238,163,238);
-            currentQuad = quadBack;
-            //Console.WriteLine("Card add : {0},{1}",pNumber,pColor);
-            is_moving = true;
+            quadBack = new Rectangle(163,4*238,163,238);
+
             position = pPosition;
+            currentQuad = quadFace;
+            //Console.WriteLine("Card add : {0},{1}",pNumber,pColor);
         }
         public void setPosition(Vector2 pPosition){
             position = pPosition;
         }
-
+        public void setQuad(Rectangle pQuad){
+            currentQuad = pQuad;
+        }
     }
 }

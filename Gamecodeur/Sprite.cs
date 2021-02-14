@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Gamecodeur{
 
-    public class Sprite : IActor
+    public class Sprite
     {
         //IACTOR
         public Vector2 Position{get;set;}
@@ -61,11 +61,6 @@ namespace Gamecodeur{
            Move(vx,vy);   
            BoudingBox = new Rectangle((int)Position.X,(int)Position.Y,Texture.Width,Texture.Height);
            //this.BoudingBox = new Rectangle(300,300,100,100);
-        }
-
-        public virtual void TouchedBy(IActor pBy)
-        {
-            
         }
     }
 

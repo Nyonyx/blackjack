@@ -4,17 +4,13 @@ namespace Gamecodeur{
 
     class Util{
 
-        static Random RandomGen = new Random();
+        static Random RandomGen = new Random(System.DateTime.Now.Millisecond);
         public static void SetRandomSeed(int pSeed){
             RandomGen = new Random(pSeed);
         }
 
-        public static int GetInt(int pMin, int pMax){
+        public static int GetRandomInt(int pMin, int pMax){
             return RandomGen.Next(pMin,pMax + 1);
-        }
-
-        public static bool CollideByBox(IActor p1, IActor p2){
-            return p1.BoudingBox.Intersects(p2.BoudingBox);
         }
     
         // Distance between two points

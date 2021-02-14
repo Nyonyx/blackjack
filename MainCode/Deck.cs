@@ -7,10 +7,8 @@ namespace GCMonogame
 {
     public class Deck{
         public List<Card> cards;
-        private Random random;
         private MainGame mainGame;
         public Deck(){ 
-            random = new Random(System.DateTime.Now.Second);
             cards = new List<Card>();
 
             int nbCards = Enum.GetNames(typeof(cardNumber)).Length;
@@ -33,7 +31,7 @@ namespace GCMonogame
             }
         }
         public Card pickup(){
-            int index = random.Next(cards.Count);
+            int index = Util.GetRandomInt(0,cards.Count-1);
             Card c = cards[index];
             cards.RemoveAt(index);
             return c;
