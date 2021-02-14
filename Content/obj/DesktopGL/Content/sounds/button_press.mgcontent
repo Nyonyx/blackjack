@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/sounds/button_press.wav</SourceFile>
-  <SourceTime>2021-02-13T23:15:42.1800943-05:00</SourceTime>
+  <SourceTime>2021-02-14T00:37:58.8920003-05:00</SourceTime>
   <DestFile>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/bin/DesktopGL/Content/sounds/button_press.xnb</DestFile>
-  <DestTime>2021-02-13T23:58:00.6869448-05:00</DestTime>
+  <DestTime>2021-02-14T00:38:16.3538654-05:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54-04:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

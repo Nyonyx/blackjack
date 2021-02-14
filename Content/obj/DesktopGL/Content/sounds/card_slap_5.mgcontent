@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/sounds/card_slap_5.wav</SourceFile>
-  <SourceTime>2021-02-13T22:54:36.7799664-05:00</SourceTime>
+  <SourceTime>2021-02-14T00:37:58.8981928-05:00</SourceTime>
   <DestFile>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/bin/DesktopGL/Content/sounds/card_slap_5.xnb</DestFile>
-  <DestTime>2021-02-14T00:19:15.5063891-05:00</DestTime>
+  <DestTime>2021-02-14T00:38:16.9932343-05:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54-04:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

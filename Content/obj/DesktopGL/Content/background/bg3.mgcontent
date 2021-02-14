@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/background/bg3.png</SourceFile>
-  <SourceTime>2021-02-11T17:58:44.2138637-05:00</SourceTime>
+  <SourceTime>2021-02-14T00:37:52.2660876-05:00</SourceTime>
   <DestFile>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/bin/DesktopGL/Content/background/bg3.xnb</DestFile>
-  <DestTime>2021-02-11T18:15:19.6461128-05:00</DestTime>
+  <DestTime>2021-02-14T00:38:04.0565607-05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
