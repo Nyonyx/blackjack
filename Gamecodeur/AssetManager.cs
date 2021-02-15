@@ -27,6 +27,11 @@ namespace Gamecodeur
         public static Texture2D blueBG;
         public static Texture2D settingsBtn;
         public static Texture2D starIcon;
+        public static Texture2D coinIcon;
+
+        //slider
+        public static Texture2D slider;
+        public static Texture2D borderCircle;
 
         public static void Load(ContentManager pContent, GraphicsDevice pGraphicsDevice){
             var fontBakeResult = TtfFontBaker.Bake(File.ReadAllBytes("Content/PixelMaster.ttf"), 60, 1024, 1024, new[]
@@ -41,6 +46,10 @@ namespace Gamecodeur
             blueBG = pContent.Load<Texture2D>("UI/blueBG");
             settingsBtn = pContent.Load<Texture2D>("UI/settingsBtn");
             starIcon = pContent.Load<Texture2D>("UI/starIcon");
+            coinIcon = pContent.Load<Texture2D>("UI/coinIcon");
+            slider = pContent.Load<Texture2D>("UI/slider2");
+            borderCircle = pContent.Load<Texture2D>("UI/borderCircle");
+
 
             for (int i = 0; i < table.Length; i++)
             {

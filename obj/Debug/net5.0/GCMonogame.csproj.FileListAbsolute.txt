@@ -146,10 +146,8 @@
 /Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/Content/UI/backBtn.xnb
 /Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/Content/UI/blueBG.xnb
 /Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/Content/UI/borderCircle.xnb
-/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/Content/UI/button.xnb
 /Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/Content/UI/button1.xnb
 /Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/Content/UI/settingsBtn.xnb
-/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/Content/UI/slider3.xnb
 /Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/GCMonogame.deps.json
 /Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/GCMonogame.runtimeconfig.json
 /Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/GCMonogame.runtimeconfig.dev.json
@@ -213,3 +211,11 @@
 /Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/Content/sounds/card_slap_5.xnb
 /Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/Content/sounds/card_slap_6.xnb
 /Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/Content/sounds/card_slap_0.xnb
+/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/Content/sounds/applause.xnb
+/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/Content/sounds/busted.xnb
+/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/Content/sounds/casino_ambiance.ogg
+/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/Content/sounds/casino_ambiance.xnb
+/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/Content/sounds/soft_win.xnb
+/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/Content/sounds/tap.xnb
+/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/Content/UI/coinIcon.xnb
+/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/Content/UI/slider2.xnb

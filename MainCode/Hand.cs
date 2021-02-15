@@ -6,6 +6,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GCMonogame
 {
+
+    public enum TypeHand{
+        player,
+        deal
+    }
+
     //Hand: class only for logic, not for drawing
     public class Hand{
         public List<Card> lst_cards {get;private set;}
@@ -13,11 +19,20 @@ namespace GCMonogame
         public int score = 0;
         private int offsetX = 0;
         public Vector2 nextCardPosition {get;private set;}
-        public Hand(Vector2 pPosition) {
+        public Color colorHand;
+        public TypeHand type;
+
+        
+        public Hand(Vector2 pPosition,TypeHand pType) {
            lst_cards = new List<Card>();
            
            Position = pPosition;
-           nextCardPosition = Position + new Vector2(180/2,238/2);
+           nextCardPosition = Position + new Vector2(180/2,0);
+           colorHand = Color.White;
+           type = pType;
+        }
+        public void looseColor(){
+            colorHand = new Color(0.4f,0.4f,0.4f);
         }
 
         public void addCardToHand(Card c){
@@ -55,7 +70,7 @@ namespace GCMonogame
             {
                 if (card.number == cardNumber.ace){
                     // as vaut 1 ou 11
-                    if (points + 1 == 21 || points + 11 > 21){
+                    if (points + 11 > 21){
                         points += 1;
                     }else if (points + 11 == 21 || points + 11 < 21){
                         points += 11;
@@ -70,7 +85,7 @@ namespace GCMonogame
             for (int i = 0; i < lst_cards.Count; i++)
             {
                 Card c = lst_cards[i];
-                pSpriteBatch.Draw(AssetManager.imgCard,c.position,c.quadFace,Color.White,0,new Vector2(0,0),
+                pSpriteBatch.Draw(AssetManager.imgCard,c.position,c.quadFace,colorHand,0,new Vector2(0,0),
                 new Vector2(1,1),SpriteEffects.None,1);      
             }
 
@@ -83,10 +98,10 @@ namespace GCMonogame
                 drawStar = true;
             }else if(score < 21)
             {
-                color = Color.GreenYellow;
+                color = colorHand;
             }
 
-            if (drawStar){
+            if (drawStar && type == TypeHand.player){
                 pSpriteBatch.Draw(AssetManager.starIcon,Position + new Vector2(0,-230),null,Color.White,0,new Vector2(AssetManager.starIcon.Width/2,AssetManager.starIcon.Height/2),new Vector2(0.7f,0.7f),SpriteEffects.None,1);       
             }
 

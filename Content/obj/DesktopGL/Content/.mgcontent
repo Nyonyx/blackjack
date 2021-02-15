@@ -26,6 +26,8 @@
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/leather/Leather7.png</File>
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/leather/Leather8.png</File>
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/leather/Leather9.png</File>
+    <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/sounds/applause.wav</File>
+    <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/sounds/busted.wav</File>
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/sounds/button_press.wav</File>
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/sounds/card_slap_0.wav</File>
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/sounds/card_slap_1.wav</File>
@@ -34,6 +36,9 @@
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/sounds/card_slap_4.wav</File>
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/sounds/card_slap_5.wav</File>
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/sounds/card_slap_6.wav</File>
+    <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/sounds/casino_ambiance.mp3</File>
+    <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/sounds/soft_win.wav</File>
+    <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/sounds/tap.wav</File>
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/table/allcards.png</File>
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/table/cardBox.png</File>
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/table/chips.png</File>
@@ -51,14 +56,19 @@
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/UI/backBtn.png</File>
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/UI/blueBG.png</File>
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/UI/borderCircle.png</File>
-    <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/UI/button.png</File>
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/UI/button1.png</File>
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/UI/button2.png</File>
+    <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/UI/coinIcon.png</File>
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/UI/settingsBtn.png</File>
-    <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/UI/slider3.png</File>
+    <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/UI/slider2.png</File>
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/UI/starIcon.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

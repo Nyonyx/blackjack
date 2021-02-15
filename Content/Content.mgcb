@@ -277,6 +277,18 @@
 /processorParam:TextureFormat=Color
 /build:leather/Leather9.png
 
+#begin sounds/applause.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/applause.wav
+
+#begin sounds/busted.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/busted.wav
+
 #begin sounds/button_press.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -324,6 +336,24 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sounds/card_slap_6.wav
+
+#begin sounds/casino_ambiance.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:sounds/casino_ambiance.mp3
+
+#begin sounds/soft_win.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/soft_win.wav
+
+#begin sounds/tap.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/tap.wav
 
 #begin table/allcards.png
 /importer:TextureImporter
@@ -529,18 +559,6 @@
 /processorParam:TextureFormat=Color
 /build:UI/borderCircle.png
 
-#begin UI/button.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/button.png
-
 #begin UI/button1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -565,6 +583,18 @@
 /processorParam:TextureFormat=Color
 /build:UI/button2.png
 
+#begin UI/coinIcon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/coinIcon.png
+
 #begin UI/settingsBtn.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -577,7 +607,7 @@
 /processorParam:TextureFormat=Color
 /build:UI/settingsBtn.png
 
-#begin UI/slider3.png
+#begin UI/slider2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -587,7 +617,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:UI/slider3.png
+/build:UI/slider2.png
 
 #begin UI/starIcon.png
 /importer:TextureImporter
