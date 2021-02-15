@@ -55,7 +55,6 @@ namespace GCMonogame
     
         float movingCardvx;
         float movingCardvy;
-        float movingCardAngle;
         float movingCardScaleX;
         Hand movingCardHand;
         bool is_movingCard;
@@ -120,19 +119,19 @@ namespace GCMonogame
         
 
             // Game Buttons
-            buttonHit = new Button(AssetManager.button1,AssetManager.button2,"Hit",new Vector2(100,screenHeight-150),
+            buttonHit = new Button(AssetManager.button1,AssetManager.button2,"Hit",new Vector2(100,screenHeight-60),
             new Vector2(AssetManager.button1.Width/2,AssetManager.button1.Height/2),new Vector2(0.4f,0.4f),onHit);
 
-            buttonStand = new Button(AssetManager.button1,AssetManager.button2,"Stand",new Vector2(300,screenHeight-150),
+            buttonStand = new Button(AssetManager.button1,AssetManager.button2,"Stand",new Vector2(300,screenHeight-60),
             new Vector2(AssetManager.button1.Width/2,AssetManager.button1.Height/2),new Vector2(0.4f,0.4f),onStand);
 
-            buttonDouble = new Button(AssetManager.button1,AssetManager.button2,"Double",new Vector2(500,screenHeight-150),
+            buttonDouble = new Button(AssetManager.button1,AssetManager.button2,"Double",new Vector2(500,screenHeight-60),
             new Vector2(AssetManager.button1.Width/2,AssetManager.button1.Height/2),new Vector2(0.4f,0.4f),onDouble);
 
-            buttonBet = new Button(AssetManager.button1,AssetManager.button2,"Bet",new Vector2(100,screenHeight-150),
+            buttonBet = new Button(AssetManager.button1,AssetManager.button2,"Bet",new Vector2(100,screenHeight-60),
             new Vector2(AssetManager.button1.Width/2,AssetManager.button1.Height/2),new Vector2(0.4f,0.4f),onBet);
 
-            buttonContinue = new Button(AssetManager.button1,AssetManager.button2,"Continue",new Vector2(100,screenHeight-150),
+            buttonContinue = new Button(AssetManager.button1,AssetManager.button2,"Continue",new Vector2(100,screenHeight-60),
             new Vector2(AssetManager.button1.Width/2,AssetManager.button1.Height/2),new Vector2(0.4f,0.4f),onContinue);
 
             sliderBet = new Slider(AssetManager.slider,new Vector2(100,screenHeight-190),
@@ -142,63 +141,44 @@ namespace GCMonogame
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(SoundManager.song_casino_ambiance);
             moneyBalance = 1000;
-            mise = 0;
             initGame();
         }
 
         public void initGame(){
             deck = new Deck();
-            playerHand = new Hand(new Vector2(worldWidth/2,worldHeight - 300),TypeHand.player);
-            dealerHand = new Hand(new Vector2(worldWidth/2,worldHeight/2),TypeHand.deal);
-            turnState = State.placeBet;
+            playerHand = new Hand(new Vector2(worldWidth/2,worldHeight - 350),TypeHand.player);
+            dealerHand = new Hand(new Vector2(worldWidth/2,(worldHeight/2)-300),TypeHand.deal);
+            // Random backgrounds
             backgroundIndex = Util.GetRandomInt(0,AssetManager.background.Length-1);
             tableIndex = Util.GetRandomInt(0,AssetManager.table.Length-1);
             leatherIndex = Util.GetRandomInt(0,AssetManager.leather.Length-1);
+
+            // Initalise moving card variables
             movingCard = null;
             movingCardvx = 0;
             movingCardvy = 0;
-            movingCardAngle = 0;
             movingCardScaleX = 1;
             movingCardHand = null;
             is_movingCard = false;
-            mise = 0;
+
+            mise = 200;
+            sliderBet.setLevel(0.2f);
             can_double = true;
-       
-        }
 
-        public void giveStartCards(){
-            // Donne les cartes si il en manque
-            if (playerHand.lst_cards.Count < 2){
-                shootCard(playerHand);
-                return;
-            }
-            if (dealerHand.lst_cards.Count < 1){
-                shootCard(dealerHand);
-                return;
-            }
-            // Si on a finit de donner les cartes du debut
-            if (dealerHand.lst_cards.Count > 2 && playerHand.lst_cards.Count > 2){
-                turnState = State.game;
-            }
-            
+            // ETAT : Placez vos mises
+            turnState = State.placeBet; 
         }
-
-        public void giveDealerEndCard(){
-           if (dealerHand.score <= 16){
-               shootCard(dealerHand);
-           }else{
-               turnState = State.endGame;
-           }
-        }
-
 
         public void shootCard(Hand h){
             movingCardHand = h;
             movingCard = deck.pickup();
-            movingCardAngle = (float)Util.angle(1096f/scaling,370f/scaling,movingCardHand.nextCardPosition.X,movingCardHand.nextCardPosition.Y);
-            movingCard.setPosition(new Vector2(1096/scaling,370/scaling));
+
+            float movingCardAngle = (float)Util.angle(1096f/scaling,370f/scaling,movingCardHand.nextCardPosition.X,movingCardHand.nextCardPosition.Y);
             movingCardvx = (float)(Math.Cos(movingCardAngle)*16);
-            movingCardvy = (float)(Math.Sin(movingCardAngle)*16);
+            movingCardvy = (float)(Math.Sin(movingCardAngle)*16);            
+            
+            movingCard.setPosition(new Vector2(1096/scaling,370/scaling));
+
             movingCard.setQuad(movingCard.quadBack);  
             movingCardScaleX = 1;
             is_movingCard = true;
@@ -235,12 +215,16 @@ namespace GCMonogame
 
         public void onDouble(Button pButton ){
             shootCard(playerHand);
-            mise = mise *2;
             moneyBalance -= mise;
+            mise = mise *2;
             turnState = State.dealerTurn;
         }
         public void onSplit(Button pButton ){
 
+        }
+
+        public void toggleSettings(Button pButton){
+            settingsOn = !settingsOn;
         }
         // UI button functions
         public void changeTable(Button pButton){
@@ -262,10 +246,30 @@ namespace GCMonogame
             }
         }
 
-        public void toggleSettings(Button pButton){
-            settingsOn = !settingsOn;
+        public void giveStartCards(){
+            // Donne les cartes si il en manque
+            if (playerHand.lst_cards.Count < 2){
+                shootCard(playerHand);
+                return;
+            }
+            if (dealerHand.lst_cards.Count < 1){
+                shootCard(dealerHand);
+                return;
+            }
+            // Si on a finit de donner les cartes du debut
+            if (dealerHand.lst_cards.Count > 1 && playerHand.lst_cards.Count > 2){
+                turnState = State.game;
+            }
+            
         }
 
+        public void giveDealerEndCard(){
+           if (dealerHand.score <= 16){
+               shootCard(dealerHand);
+           }else{
+               turnState = State.endGame;
+           }
+        }
         protected override void Update(GameTime gameTime)
         {
             KeyboardState newKB = Keyboard.GetState();
@@ -313,7 +317,8 @@ namespace GCMonogame
             if (turnState == State.endGame){
                 buttonContinue.Update(gameTime);
             }
-            
+            buttonSettings.Update(gameTime);
+
             // Update moving card
             if (is_movingCard){
                 Vector2 v = new Vector2(movingCard.position.X-movingCardHand.nextCardPosition.X,movingCard.position.Y-movingCardHand.nextCardPosition.Y);
@@ -335,11 +340,6 @@ namespace GCMonogame
                             movingCardHand.addCardToHand(movingCard);
                             is_movingCard = false;
 
-                            // Si notre score >= 21, on arrete la game
-                            if(playerHand.score >= 21){
-                                turnState = State.endGame;
-                            }
-
                             // Machine a etat
                             if (turnState == State.giveFirstCards){
                                 //Continue de donner des cartes
@@ -351,11 +351,13 @@ namespace GCMonogame
 
                             if(turnState == State.endGame){
                                 // Détermine qui a gagné
-                                string message = "";
+                            
                                 string state = "null";
-                                if (playerHand.score > 21){                                
+                                if (playerHand.score > 21){   
+                                    turnState = State.endGame;                             
                                     state = "loose";
-                                }else if(playerHand.score == 21){                                  
+                                }else if(playerHand.score == 21){    
+                                    turnState = State.endGame;                              
                                     state = "win";
                                     SoundManager.snd_soft_win.Play();
                                 }else if(dealerHand.score > 21){                                  
@@ -376,7 +378,7 @@ namespace GCMonogame
                                         playerHand.looseColor();
                                         break;
                                     case "win":
-                                        moneyBalance = moneyBalance + mise + (mise*2);
+                                        moneyBalance = moneyBalance + (mise*2);
                                         SoundManager.snd_applause.Play();
                                         dealerHand.looseColor();
                                         break;
@@ -387,16 +389,11 @@ namespace GCMonogame
                                     default:
                                         break;
                                 }
-                                Console.WriteLine(message);
                             }
                         }       
                     }
                 }   
             }
- 
-
-
-            buttonSettings.Update(gameTime);
             oldKB = newKB;
             base.Update(gameTime);
         }
@@ -443,7 +440,7 @@ namespace GCMonogame
                 _spriteBatch.DrawString(AssetManager.MainFont,"Settings",new Vector2(screenWidth/2,(screenHeight/2)-175),Color.White,0,new Vector2(size.X/2,size.Y/2),new Vector2(1.2f,1.2f),SpriteEffects.None,1);
             }
 
-                        // Draw UI Bet
+            // Draw UI Bet
             if (turnState == State.placeBet){
                 sliderBet.Draw(_spriteBatch);
                 buttonBet.Draw(_spriteBatch);
@@ -470,9 +467,11 @@ namespace GCMonogame
 
 
             // Draw DEBUG UI
-            _spriteBatch.DrawString(AssetManager.MainFont,"X"+Mouse.GetState().Position.X.ToString(),new Vector2(0,0),Color.White);
-            _spriteBatch.DrawString(AssetManager.MainFont,"Y"+Mouse.GetState().Position.Y.ToString(),new Vector2(0,30),Color.White);
-
+            if (GameState.DEBUG){
+                _spriteBatch.DrawString(AssetManager.MainFont,"X"+Mouse.GetState().Position.X.ToString(),new Vector2(0,0),Color.White);
+                _spriteBatch.DrawString(AssetManager.MainFont,"Y"+Mouse.GetState().Position.Y.ToString(),new Vector2(0,30),Color.White);
+            }
+            
             
 
             buttonSettings.Draw(_spriteBatch);

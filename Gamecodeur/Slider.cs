@@ -40,7 +40,8 @@ namespace Gamecodeur{
         // 0 = 0% slide
         // 1 = 100% slide
         public void setLevel(float pLevel){
-            percent = Math.Clamp(pLevel,0,1);
+            percent = Math.Clamp(pLevel,0.05f,1);
+            cursorY = (float)((BoudingBox.Y + BoudingBox.Height) - (percent*BoudingBox.Height));
         }
         public void Update(GameTime pGameTime){
 
@@ -71,7 +72,7 @@ namespace Gamecodeur{
                 if (onSlide != null){
                     onSlide(this);
                 }
-                float s = Math.Abs(MousePos.Y - (BoudingBox.Y+BoudingBox.Height));
+                float s = (BoudingBox.Y+BoudingBox.Height)-MousePos.Y;
                 setLevel(s/BoudingBox.Height);
 
                 cursorY = (float)((BoudingBox.Y + BoudingBox.Height) - (percent*BoudingBox.Height));
@@ -91,7 +92,7 @@ namespace Gamecodeur{
             pSpriteBatch.Draw(texture,this.Position,null,Color.Green,0,origin,scaling,SpriteEffects.None,1);
             // Draw slider front
             pSpriteBatch.Draw(texture,this.Position,new Rectangle(0,0,texture.Width,(int)(texture.Height -(percent*texture.Height))),Color.Pink,0,origin,scaling,SpriteEffects.None,1);
-
+            // Draw cursor
             pSpriteBatch.Draw(AssetManager.circleBoard,new Vector2(Position.X,cursorY),null,Color.White,0,new Vector2(AssetManager.circleBoard.Width/2,AssetManager.circleBoard.Height/2),new Vector2(0.2f,0.2f),SpriteEffects.None,1);
         
         }

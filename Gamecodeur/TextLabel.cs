@@ -4,25 +4,16 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Gamecodeur{
     public class TextLabel{
 
-        string label;
+        public Vector2 Position{get; private set; }
+        public bool isCenter {get ; private set;}
+        private Vector2 offset;
+        private string label;
+
         public TextLabel(string pLabel){
             label = pLabel;
-            isActive = true;
         }
-
-        public Vector2 Position{get;set;}
-        private Vector2 offset;
-
-        public Rectangle BoudingBox{get; private set;}
-
-        public bool ToRemove { get; set; }
-        public bool isActive { get; set; }
-        public int zOrder { get; set; }
-        public bool isCenter {get;set;}
-
-        public void Draw(SpriteBatch pSpriteBatch)
-        {
-            pSpriteBatch.DrawString(AssetManager.MainFont,label,Position-offset,Color.White);
+        public void alignCenter(){
+            isCenter = true;
         }
 
         public void Update(GameTime pGameTime)
@@ -31,6 +22,10 @@ namespace Gamecodeur{
                 Vector2 size = AssetManager.MainFont.MeasureString(label);
                 offset = size - new Vector2(size.X/2,size.Y/2);
             }
+        }       
+        public void Draw(SpriteBatch pSpriteBatch)
+        {
+            pSpriteBatch.DrawString(AssetManager.MainFont,label,Position-offset,Color.White);
         }
     }
 }
