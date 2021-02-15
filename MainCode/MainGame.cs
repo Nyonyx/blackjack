@@ -167,6 +167,7 @@ namespace GCMonogame
 
             // ETAT : Placez vos mises
             turnState = State.placeBet; 
+            //playerHand.setVelocity(0.1f,0);
         }
 
         public void shootCard(Hand h){
@@ -174,8 +175,8 @@ namespace GCMonogame
             movingCard = deck.pickup();
 
             float movingCardAngle = (float)Util.angle(1096f/scaling,370f/scaling,movingCardHand.nextCardPosition.X,movingCardHand.nextCardPosition.Y);
-            movingCardvx = (float)(Math.Cos(movingCardAngle)*16);
-            movingCardvy = (float)(Math.Sin(movingCardAngle)*16);            
+            movingCardvx = (float)(Math.Cos(movingCardAngle)*19);
+            movingCardvy = (float)(Math.Sin(movingCardAngle)*19);            
             
             movingCard.setPosition(new Vector2(1096/scaling,370/scaling));
 
@@ -276,7 +277,6 @@ namespace GCMonogame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)){
                 Exit();
             }
-
             if (GameState.DEBUG){
                 if (newKB.IsKeyDown(Keys.Space) && !oldKB.IsKeyDown(Keys.Space)){
                     Console.WriteLine("Game Restart");
@@ -322,7 +322,16 @@ namespace GCMonogame
             // Update moving card
             if (is_movingCard){
                 Vector2 v = new Vector2(movingCard.position.X-movingCardHand.nextCardPosition.X,movingCard.position.Y-movingCardHand.nextCardPosition.Y);
+                
+                // add friction
+                movingCardvx *= 0.987f;
+                movingCardvy *= 0.987f;
+                
+                // add velocity
                 movingCard.setPosition(movingCard.position + new Vector2(movingCardvx,movingCardvy));
+                
+                
+                
                 // Si carte arrive a destination
                 if (v.Length() < 18){
 
@@ -339,6 +348,10 @@ namespace GCMonogame
                             // ajoute a la main
                             movingCardHand.addCardToHand(movingCard);
                             is_movingCard = false;
+                            
+                            if (playerHand.score >= 21){
+                                turnState = State.endGame;
+                            }
 
                             // Machine a etat
                             if (turnState == State.giveFirstCards){
@@ -354,10 +367,10 @@ namespace GCMonogame
                             
                                 string state = "null";
                                 if (playerHand.score > 21){   
-                                    turnState = State.endGame;                             
+                                                             
                                     state = "loose";
                                 }else if(playerHand.score == 21){    
-                                    turnState = State.endGame;                              
+                                                               
                                     state = "win";
                                     SoundManager.snd_soft_win.Play();
                                 }else if(dealerHand.score > 21){                                  

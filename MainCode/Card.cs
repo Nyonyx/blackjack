@@ -34,6 +34,8 @@ namespace GCMonogame
         public Rectangle quadFace {get; private set;}
         public Rectangle quadBack {get; private set;}
         public Rectangle currentQuad {get; private set;}
+
+        // Position relative to the hand !!
         public Vector2 position {get;private set;}
 
         public Card(cardNumber pNumber,cardColor pColor,Vector2 pPosition){

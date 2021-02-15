@@ -21,7 +21,8 @@ namespace GCMonogame
         public Vector2 nextCardPosition {get;private set;}
         public Color colorHand;
         public TypeHand type;
-
+        public float vx = 0;
+        public float vy = 0;
         
         public Hand(Vector2 pPosition,TypeHand pType) {
            lst_cards = new List<Card>();
@@ -34,6 +35,13 @@ namespace GCMonogame
         public void looseColor(){
             colorHand = new Color(0.4f,0.4f,0.4f);
         }
+        public void setVelocity(float pVx, float pVy){
+            vx = pVx;
+            vy = pVy;
+        }
+        public void update(GameTime pGameTime){
+            Position = new Vector2(Position.X + vx, Position.Y + vy);
+        }
 
         public void addCardToHand(Card c){
             lst_cards.Add(c);
@@ -41,8 +49,8 @@ namespace GCMonogame
             for (int i = 0; i < lst_cards.Count; i++)
             {
                 Card card = lst_cards[i];
-                card.setPosition(new Vector2((Position.X + (i*180)) - centerX,
-                Position.Y - (238/2)));
+                card.setPosition(new Vector2(((i*180)) - centerX,
+                - (238/2)));
             }
             calculNextPosition();
             score = examine();
@@ -50,7 +58,7 @@ namespace GCMonogame
 
         private void calculNextPosition(){
             Card last = lst_cards[lst_cards.Count-1];
-            nextCardPosition = last.position + new Vector2(180 + (163/2),238/2);
+            nextCardPosition = Position + last.position + new Vector2(180 + (163/2),238/2);
         }
         // return number of points of hand
         public int examine(){
@@ -81,11 +89,11 @@ namespace GCMonogame
         }      
 
         public void draw(SpriteBatch pSpriteBatch){
-            
+            // Draw cards
             for (int i = 0; i < lst_cards.Count; i++)
             {
                 Card c = lst_cards[i];
-                pSpriteBatch.Draw(AssetManager.imgCard,c.position,c.quadFace,colorHand,0,new Vector2(0,0),
+                pSpriteBatch.Draw(AssetManager.imgCard,Position + c.position,c.quadFace,colorHand,0,new Vector2(0,0),
                 new Vector2(1,1),SpriteEffects.None,1);      
             }
 
@@ -100,11 +108,11 @@ namespace GCMonogame
             {
                 color = colorHand;
             }
-
+            // Draw Star
             if (drawStar && type == TypeHand.player){
                 pSpriteBatch.Draw(AssetManager.starIcon,Position + new Vector2(0,-230),null,Color.White,0,new Vector2(AssetManager.starIcon.Width/2,AssetManager.starIcon.Height/2),new Vector2(0.7f,0.7f),SpriteEffects.None,1);       
             }
-
+            // Draw Score
             Vector2 size = AssetManager.MainFont.MeasureString(score.ToString());
             pSpriteBatch.DrawString(AssetManager.MainFont,score.ToString(),Position + new Vector2(0,-230),color,0,new Vector2(size.X/2,size.Y/2),new Vector2(2,2),SpriteEffects.None,1);
         }  
