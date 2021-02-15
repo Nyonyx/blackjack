@@ -128,6 +128,9 @@ namespace GCMonogame
             buttonDouble = new Button(AssetManager.button1,AssetManager.button2,"Double",new Vector2(500,screenHeight-60),
             new Vector2(AssetManager.button1.Width/2,AssetManager.button1.Height/2),new Vector2(0.4f,0.4f),onDouble);
 
+            buttonSplit = new Button(AssetManager.button1,AssetManager.button2,"Split",new Vector2(700,screenHeight-60),
+            new Vector2(AssetManager.button1.Width/2,AssetManager.button1.Height/2),new Vector2(0.4f,0.4f),onSplit);
+
             buttonBet = new Button(AssetManager.button1,AssetManager.button2,"Bet",new Vector2(100,screenHeight-60),
             new Vector2(AssetManager.button1.Width/2,AssetManager.button1.Height/2),new Vector2(0.4f,0.4f),onBet);
 
@@ -298,6 +301,7 @@ namespace GCMonogame
             if (!is_movingCard && turnState != State.endGame && turnState != State.placeBet){
                 buttonHit.Update(gameTime);
                 buttonStand.Update(gameTime);
+                buttonSplit.Update(gameTime);
 
                 if (can_double){
                     buttonDouble.Update(gameTime);
@@ -308,11 +312,12 @@ namespace GCMonogame
                 
                 buttonHit.setDrawColor(Color.White);
                 buttonStand.setDrawColor(Color.White);
-                
+                buttonSplit.setDrawColor(Color.White);
             }else{
                 buttonHit.setDrawColor(Color.Gray);
                 buttonStand.setDrawColor(Color.Gray);
                 buttonDouble.setDrawColor(Color.Gray);
+                buttonSplit.setDrawColor(Color.Gray);
             }
             if (turnState == State.endGame){
                 buttonContinue.Update(gameTime);
@@ -466,6 +471,7 @@ namespace GCMonogame
                 buttonHit.Draw(_spriteBatch);
                 buttonStand.Draw(_spriteBatch);
                 buttonDouble.Draw(_spriteBatch);
+                buttonSplit.Draw(_spriteBatch);
             }
 
             if (turnState == State.endGame){
