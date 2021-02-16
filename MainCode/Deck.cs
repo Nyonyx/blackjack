@@ -1,3 +1,5 @@
+#undef CONTROL_CARD // Permet de placer des cartes pour debugger
+
 using System;
 using System.Collections.Generic;
 using Gamecodeur;
@@ -8,6 +10,11 @@ namespace GCMonogame
     public class Deck{
         public List<Card> cards;
         private MainGame mainGame;
+        
+        #if DEBUG
+            public List<Card> cardsdebug;
+        #endif
+
         public Deck(){ 
             cards = new List<Card>();
 
@@ -29,12 +36,37 @@ namespace GCMonogame
                     }
                 }              
             }
+
+            #if DEBUG && CONTROL_CARD
+                cardsdebug = new List<Card>();
+
+                cardsdebug.Add(new Card(cardNumber.ten,cardColor.spades,new Vector2(0,0)));
+                cardsdebug.Add(new Card(cardNumber.ten,cardColor.spades,new Vector2(0,0)));
+                cardsdebug.Add(new Card(cardNumber.ten,cardColor.spades,new Vector2(0,0)));
+                cardsdebug.Add(new Card(cardNumber.ten,cardColor.spades,new Vector2(0,0)));
+                cardsdebug.Add(new Card(cardNumber.ten,cardColor.spades,new Vector2(0,0)));
+                cardsdebug.Add(new Card(cardNumber.ten,cardColor.spades,new Vector2(0,0)));
+                cardsdebug.Add(new Card(cardNumber.ten,cardColor.spades,new Vector2(0,0)));
+
+                cardsdebug.Add(new Card(cardNumber.ace,cardColor.diamond,new Vector2(0,0)));
+                cardsdebug.Add(new Card(cardNumber.ace,cardColor.hearts,new Vector2(0,0)));
+                cardsdebug.Add(new Card(cardNumber.five,cardColor.diamond,new Vector2(0,0)));
+                cardsdebug.Add(new Card(cardNumber.two,cardColor.club,new Vector2(0,0)));
+                cardsdebug.Add(new Card(cardNumber.ten,cardColor.club,new Vector2(0,0)));
+                cardsdebug.Add(new Card(cardNumber.ten,cardColor.spades,new Vector2(0,0)));
+            #endif
         }
         public Card pickup(){
-            int index = Util.GetRandomInt(0,cards.Count-1);
-            Card c = cards[index];
-            cards.RemoveAt(index);
-            return c;
+            #if DEBUG && CONTROL_CARD
+                Card c = new Card(cardsdebug[cardsdebug.Count-1].number,cardsdebug[cardsdebug.Count-1].color,new Vector2(0,0));
+                cardsdebug.RemoveAt(cardsdebug.Count-1);
+                return c;
+            #else
+                int index = Util.GetRandomInt(0,cards.Count-1);
+                Card c = cards[index];
+                cards.RemoveAt(index);
+                return c;
+            #endif
         }
     }
     

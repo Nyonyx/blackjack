@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Gamecodeur;
 using Microsoft.Xna.Framework;
@@ -43,7 +44,7 @@ namespace GCMonogame
 
         bool settingsOn = false;
 
-        Hand playerHand;
+        List<Hand> playerHands;
         Hand dealerHand;
         Deck deck;
         int moneyBalance;
@@ -60,6 +61,19 @@ namespace GCMonogame
         bool is_movingCard;
 
         bool can_double = true;
+
+        private int _currentHandIndex; // never use this value
+        public int currentHandIndex{
+            get{
+                return _currentHandIndex;
+            }
+            private set{
+                _currentHandIndex = value;
+                if (_currentHandIndex > playerHands.Count-1){
+                    _currentHandIndex = playerHands.Count-1;
+                }
+            }
+        }
 
         public enum State{
             placeBet,
@@ -149,9 +163,10 @@ namespace GCMonogame
 
         public void initGame(){
             deck = new Deck();
-            playerHand = new Hand(new Vector2(worldWidth/2,worldHeight - 350),TypeHand.player);
+            playerHands = new List<Hand>();
+            playerHands.Add(new Hand(new Vector2(worldWidth/2,worldHeight - 500),TypeHand.player));
             dealerHand = new Hand(new Vector2(worldWidth/2,(worldHeight/2)-300),TypeHand.deal);
-            // Random backgrounds
+            // Pick Random backgrounds
             backgroundIndex = Util.GetRandomInt(0,AssetManager.background.Length-1);
             tableIndex = Util.GetRandomInt(0,AssetManager.table.Length-1);
             leatherIndex = Util.GetRandomInt(0,AssetManager.leather.Length-1);
@@ -170,7 +185,20 @@ namespace GCMonogame
 
             // ETAT : Placez vos mises
             turnState = State.placeBet; 
-            //playerHand.setVelocity(0.1f,0);
+            currentHandIndex = 0;
+        }
+
+        public void switchHand(){      
+            
+            // si on est a la derniere main
+            if (currentHandIndex >= playerHands.Count-1){                   
+                if (remainHands()){
+                     turnState = State.dealerTurn;
+                }else{
+                    turnState = State.endGame;
+                }            
+            }
+            currentHandIndex += 1;
         }
 
         public void shootCard(Hand h){
@@ -178,11 +206,10 @@ namespace GCMonogame
             movingCard = deck.pickup();
 
             float movingCardAngle = (float)Util.angle(1096f/scaling,370f/scaling,movingCardHand.nextCardPosition.X,movingCardHand.nextCardPosition.Y);
-            movingCardvx = (float)(Math.Cos(movingCardAngle)*19);
-            movingCardvy = (float)(Math.Sin(movingCardAngle)*19);            
+            movingCardvx = (float)(Math.Cos(movingCardAngle)*25);
+            movingCardvy = (float)(Math.Sin(movingCardAngle)*25);            
             
             movingCard.setPosition(new Vector2(1096/scaling,370/scaling));
-
             movingCard.setQuad(movingCard.quadBack);  
             movingCardScaleX = 1;
             is_movingCard = true;
@@ -208,22 +235,49 @@ namespace GCMonogame
             moneyBalance -= mise;
         }
         public void onHit(Button pButton){
-            shootCard(playerHand);
+            shootCard(playerHands[currentHandIndex]);
             can_double = false;
         }
 
-        public void onStand(Button pButton ){
-            shootCard(dealerHand);
-            turnState = State.dealerTurn;
+        public void onStand(Button pButton ){  
+            // So on a finit de jouer toutes nos mains
+            if (currentHandIndex == playerHands.Count-1){
+                turnState = State.dealerTurn;
+                shootCard(dealerHand);
+            }
+            switchHand();
+            
         }
 
         public void onDouble(Button pButton ){
-            shootCard(playerHand);
+            shootCard(playerHands[currentHandIndex]);
             moneyBalance -= mise;
             mise = mise *2;
-            turnState = State.dealerTurn;
+            switchHand();
         }
         public void onSplit(Button pButton ){
+            if (playerHands.Count == 1){
+                // move current hand x00
+                playerHands[0].setPosition(new Vector2((worldWidth/2)-500,(worldHeight/2)));
+                // create a new hand 00x
+                Hand hand = new Hand(new Vector2((worldWidth/2)+500,(worldHeight/2)),TypeHand.player);
+                playerHands.Add(hand);
+
+                hand.addCardToHand(playerHands[0].lst_cards[1]);
+                playerHands[0].removeLastCard();
+                currentHandIndex = 0;
+                // Give 2 Cards Each Hands
+                turnState = State.giveFirstCards;
+                shootCard(playerHands[0]);
+            }else if(playerHands.Count == 2){
+                // Create a new hand
+                Hand hand = new Hand(new Vector2((worldWidth/2),(worldHeight/2)+500),TypeHand.player);
+                playerHands.Add(hand);
+                hand.addCardToHand(playerHands[currentHandIndex].lst_cards[1]);            
+                playerHands[currentHandIndex].removeLastCard();
+                turnState = State.giveFirstCards;
+                shootCard(playerHands[currentHandIndex]);
+            }
 
         }
 
@@ -251,19 +305,33 @@ namespace GCMonogame
         }
 
         public void giveStartCards(){
-            // Donne les cartes si il en manque
-            if (playerHand.lst_cards.Count < 2){
-                shootCard(playerHand);
-                return;
-            }
-            if (dealerHand.lst_cards.Count < 1){
-                shootCard(dealerHand);
-                return;
-            }
-            // Si on a finit de donner les cartes du debut
-            if (dealerHand.lst_cards.Count > 1 && playerHand.lst_cards.Count > 2){
-                turnState = State.game;
-            }
+          
+            // si on est au debut de la game
+            //if (playerHands.Count == 1){
+                // Donne les cartes si il en manque
+                if (playerHands[0].lst_cards.Count < 2){
+                    shootCard(playerHands[0]);
+                    return;
+                }
+                if (playerHands.Count > 1){
+                    if (playerHands[1].lst_cards.Count < 2){
+                        shootCard(playerHands[1]);
+                        return;  
+                    }
+                }
+                if (playerHands.Count > 2){
+                    if (playerHands[2].lst_cards.Count < 2){
+                        shootCard(playerHands[2]);
+                        return;  
+                    }
+                }
+
+                if (dealerHand.lst_cards.Count < 1){
+                    shootCard(dealerHand);
+                    return;
+                }
+                turnState = State.game;  
+            //}   
             
         }
 
@@ -277,15 +345,24 @@ namespace GCMonogame
         protected override void Update(GameTime gameTime)
         {
             KeyboardState newKB = Keyboard.GetState();
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)){
-                Exit();
-            }
-            if (GameState.DEBUG){
+
+            #if DEBUG
                 if (newKB.IsKeyDown(Keys.Space) && !oldKB.IsKeyDown(Keys.Space)){
                     Console.WriteLine("Game Restart");
                     initGame();
                 }
+            #endif
+
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)){
+                Exit();
             }
+            foreach (Hand hand in playerHands)
+            {
+                hand.update(gameTime);
+            }
+            
+            dealerHand.update(gameTime);
+
             if (turnState == State.placeBet){
                 sliderBet.Update(gameTime);
                 buttonBet.Update(gameTime);
@@ -301,7 +378,16 @@ namespace GCMonogame
             if (!is_movingCard && turnState != State.endGame && turnState != State.placeBet){
                 buttonHit.Update(gameTime);
                 buttonStand.Update(gameTime);
-                buttonSplit.Update(gameTime);
+                buttonSplit.setDrawColor(Color.White);
+                buttonStand.setDrawColor(Color.White);
+
+                if (playerHands.Count < 3 && playerHands[currentHandIndex].lst_cards.Count == 2){
+                    buttonSplit.Update(gameTime);
+                    buttonSplit.setDrawColor(Color.White);
+                }else{
+                    buttonSplit.setDrawColor(Color.Gray);
+                }
+                
 
                 if (can_double){
                     buttonDouble.Update(gameTime);
@@ -309,10 +395,11 @@ namespace GCMonogame
                 }else{
                     buttonDouble.setDrawColor(Color.Gray);
                 }
+
+  
                 
                 buttonHit.setDrawColor(Color.White);
-                buttonStand.setDrawColor(Color.White);
-                buttonSplit.setDrawColor(Color.White);
+                
             }else{
                 buttonHit.setDrawColor(Color.Gray);
                 buttonStand.setDrawColor(Color.Gray);
@@ -334,10 +421,8 @@ namespace GCMonogame
                 
                 // add velocity
                 movingCard.setPosition(movingCard.position + new Vector2(movingCardvx,movingCardvy));
-                
-                
-                
-                // Si carte arrive a destination
+                  
+                // Si carte arrive au point
                 if (v.Length() < 18){
 
                     movingCard.setPosition(movingCardHand.nextCardPosition);
@@ -348,22 +433,24 @@ namespace GCMonogame
                         }
                     }else if(movingCard.currentQuad == movingCard.quadFace){
                         movingCardScaleX += 0.06f;
-                        // Si carte arrive a destination
+
+
+                        // Carte ajoute a la main
                         if (movingCardScaleX > 1){
-                            // ajoute a la main
+                
                             movingCardHand.addCardToHand(movingCard);
                             is_movingCard = false;
-                            
-                            if (playerHand.score >= 21){
-                                turnState = State.endGame;
-                            }
 
-                            // Machine a etat
+                            Hand currentHand = playerHands[currentHandIndex];
+                            
+                             if (currentHand.score >= 21){
+                                switchHand();
+                             }
+
+                            // Continue de donner des cartes si on en a besoin
                             if (turnState == State.giveFirstCards){
-                                //Continue de donner des cartes
                                 giveStartCards();
                             }else if(turnState == State.dealerTurn){
-                                //Continue de donner des cartes jusqua avoir 16 points 
                                 giveDealerEndCard();
                             }
 
@@ -371,10 +458,10 @@ namespace GCMonogame
                                 // Détermine qui a gagné
                             
                                 string state = "null";
-                                if (playerHand.score > 21){   
+                                if (playerHands[currentHandIndex].score > 21){   
                                                              
                                     state = "loose";
-                                }else if(playerHand.score == 21){    
+                                }else if(playerHands[currentHandIndex].score == 21){    
                                                                
                                     state = "win";
                                     SoundManager.snd_soft_win.Play();
@@ -383,17 +470,20 @@ namespace GCMonogame
                                 }else if(dealerHand.score == 21){                               
                                     state = "loose";
                                     SoundManager.snd_busted.Play();
-                                }else if(playerHand.score < dealerHand.score){                                  
+                                }else if(playerHands[currentHandIndex].score < dealerHand.score){                                  
                                     state = "loose";
-                                }else if(playerHand.score > dealerHand.score){
+                                }else if(playerHands[currentHandIndex].score > dealerHand.score){
                                     state = "win";
-                                }else if(playerHand.score == dealerHand.score){                               
+                                }else if(playerHands[currentHandIndex].score == dealerHand.score){                               
                                     state = "equals";
                                 }
                                 switch (state)
                                 {
                                     case "loose":
-                                        playerHand.looseColor();
+                                        for (int i = 0; i < playerHands.Count; i++)
+                                        {
+                                            playerHands[i].looseColor();
+                                        }
                                         break;
                                     case "win":
                                         moneyBalance = moneyBalance + (mise*2);
@@ -416,6 +506,17 @@ namespace GCMonogame
             base.Update(gameTime);
         }
 
+        private bool remainHands(){
+            bool c = false;
+            foreach (Hand hand in playerHands)
+            {
+                if (hand.score < 21){
+                    c = true;
+                }
+            }
+            return c;
+        }
+
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
@@ -431,10 +532,19 @@ namespace GCMonogame
             _spriteBatch.Draw(AssetManager.chips,new Vector2(worldWidth/2,0),null,Color.White,0,new Vector2(AssetManager.chips.Width/2,0),new Vector2(1,1),SpriteEffects.None,1);  
             _spriteBatch.Draw(AssetManager.cardBox,new Vector2(worldWidth-300,(worldHeight/2)-500),null,Color.White,0,new Vector2(0,0),new Vector2(1,1),SpriteEffects.None,1);  
             
-            //Draw Player Hand
-            if (playerHand.score != 0){
-                playerHand.draw(_spriteBatch);
+            //Draw Player Hands
+            foreach (Hand hand in playerHands)
+            {
+                if (hand.score != 0){
+                    hand.draw(_spriteBatch);
+                }   
+                // Draw cursor on the hand
+                if (hand == playerHands[currentHandIndex] && !is_movingCard && playerHands.Count > 1){
+                    _spriteBatch.Draw(AssetManager.handIcon,hand.nextCardPosition,null,Color.White,(float)(-Math.PI/2),new Vector2(AssetManager.handIcon.Width/2,AssetManager.handIcon.Height/2),new Vector2(0.4f,0.4f),SpriteEffects.None,1);  
+                           
+                }             
             }
+     
             // Draw Dealer Hand
             if (dealerHand.score != 0){
                 dealerHand.draw(_spriteBatch);
@@ -483,18 +593,23 @@ namespace GCMonogame
             new Vector2(AssetManager.coinIcon.Width/2,AssetManager.coinIcon.Height/2),new Vector2(0.3f,0.3f),SpriteEffects.None,1);
             
             _spriteBatch.DrawString(AssetManager.MainFont,moneyBalance.ToString(),new Vector2(screenWidth-200,screenHeight-100),Color.White);
-
-
-            // Draw DEBUG UI
-            if (GameState.DEBUG){
-                _spriteBatch.DrawString(AssetManager.MainFont,"X"+Mouse.GetState().Position.X.ToString(),new Vector2(0,0),Color.White);
-                _spriteBatch.DrawString(AssetManager.MainFont,"Y"+Mouse.GetState().Position.Y.ToString(),new Vector2(0,30),Color.White);
-            }
-            
-            
-
             buttonSettings.Draw(_spriteBatch);
             _spriteBatch.End();
+            
+            // Draw DEBUG UI
+            
+            #if DEBUG
+                _spriteBatch.Begin(SpriteSortMode.Deferred,null,null,null,null,null,Matrix.CreateScale(0.5f,0.5f,1));
+                _spriteBatch.DrawString(AssetManager.MainFont,"X"+Mouse.GetState().Position.X.ToString(),new Vector2(0,0),Color.White);
+                _spriteBatch.DrawString(AssetManager.MainFont,"Y"+Mouse.GetState().Position.Y.ToString(),new Vector2(0,40),Color.White);
+                
+                _spriteBatch.DrawString(AssetManager.MainFont,"State"+turnState.ToString(),new Vector2(140,0),Color.White);
+                _spriteBatch.End();
+            #endif
+            
+            
+
+
             base.Draw(gameTime);
         }
     }

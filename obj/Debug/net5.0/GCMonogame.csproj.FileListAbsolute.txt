@@ -219,3 +219,4 @@
 /Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/Content/sounds/tap.xnb
 /Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/Content/UI/coinIcon.xnb
 /Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/Content/UI/slider2.xnb
+/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/bin/Debug/net5.0/Content/UI/hand.xnb
