@@ -188,14 +188,17 @@ namespace GCMonogame
             currentHandIndex = 0;
         }
 
-        public void switchHand(){
+        public void switchHand(){      
             
-            
-            currentHandIndex += 1;
             // si on est a la derniere main
-            if (currentHandIndex > playerHands.Count-1){
-                turnState = State.dealerTurn;
+            if (currentHandIndex >= playerHands.Count-1){                   
+                if (remainHands()){
+                     turnState = State.dealerTurn;
+                }else{
+                    turnState = State.endGame;
+                }            
             }
+            currentHandIndex += 1;
         }
 
         public void shootCard(Hand h){
@@ -426,10 +429,7 @@ namespace GCMonogame
                             Hand currentHand = playerHands[currentHandIndex];
                             
                              if (currentHand.score >= 21){
-
-                                
                                 switchHand();
-                    
                              }
 
                             // Continue de donner des cartes si on en a besoin
