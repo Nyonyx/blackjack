@@ -164,7 +164,7 @@ namespace GCMonogame
         public void initGame(){
             deck = new Deck();
             playerHands = new List<Hand>();
-            playerHands.Add(new Hand(new Vector2(worldWidth/2,worldHeight - 350),TypeHand.player));
+            playerHands.Add(new Hand(new Vector2(worldWidth/2,worldHeight - 500),TypeHand.player));
             dealerHand = new Hand(new Vector2(worldWidth/2,(worldHeight/2)-300),TypeHand.deal);
             // Pick Random backgrounds
             backgroundIndex = Util.GetRandomInt(0,AssetManager.background.Length-1);
@@ -256,21 +256,29 @@ namespace GCMonogame
             switchHand();
         }
         public void onSplit(Button pButton ){
+            if (playerHands.Count == 1){
+                // move current hand x00
+                playerHands[0].setPosition(new Vector2((worldWidth/2)-500,(worldHeight/2)));
+                // create a new hand 00x
+                Hand hand = new Hand(new Vector2((worldWidth/2)+500,(worldHeight/2)),TypeHand.player);
+                playerHands.Add(hand);
 
-            // move current hand x00
-            playerHands[0].setPosition(new Vector2((worldWidth/2)-400,playerHands[0].Position.Y));
+                hand.addCardToHand(playerHands[0].lst_cards[1]);
+                playerHands[0].removeLastCard();
+                currentHandIndex = 0;
+                // Give 2 Cards Each Hands
+                turnState = State.giveFirstCards;
+                shootCard(playerHands[0]);
+            }else if(playerHands.Count == 2){
+                // Create a new hand
+                Hand hand = new Hand(new Vector2((worldWidth/2),(worldHeight/2)+500),TypeHand.player);
+                playerHands.Add(hand);
+                hand.addCardToHand(playerHands[currentHandIndex].lst_cards[1]);            
+                playerHands[currentHandIndex].removeLastCard();
+                turnState = State.giveFirstCards;
+                shootCard(playerHands[currentHandIndex]);
+            }
 
-            // create a new hand 00x
-            Hand hand = new Hand(new Vector2((worldWidth/2)+400,playerHands[0].Position.Y),TypeHand.player);
-            playerHands.Add(hand);
-
-            hand.addCardToHand(playerHands[0].lst_cards[1]);
-            playerHands[0].removeLastCard();
-
-            currentHandIndex = 0;
-            // Give 2 Cards Each Hands
-            turnState = State.giveFirstCards;
-            shootCard(playerHands[0]);
         }
 
         public void toggleSettings(Button pButton){
@@ -308,6 +316,12 @@ namespace GCMonogame
                 if (playerHands.Count > 1){
                     if (playerHands[1].lst_cards.Count < 2){
                         shootCard(playerHands[1]);
+                        return;  
+                    }
+                }
+                if (playerHands.Count > 2){
+                    if (playerHands[2].lst_cards.Count < 2){
+                        shootCard(playerHands[2]);
                         return;  
                     }
                 }
@@ -366,7 +380,8 @@ namespace GCMonogame
                 buttonStand.Update(gameTime);
                 buttonSplit.setDrawColor(Color.White);
                 buttonStand.setDrawColor(Color.White);
-                if (playerHands.Count == 1 && playerHands[0].lst_cards.Count == 2){
+
+                if (playerHands.Count < 3 && playerHands[currentHandIndex].lst_cards.Count == 2){
                     buttonSplit.Update(gameTime);
                     buttonSplit.setDrawColor(Color.White);
                 }else{
