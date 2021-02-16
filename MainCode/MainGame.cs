@@ -305,34 +305,35 @@ namespace GCMonogame
         }
 
         public void giveStartCards(){
-          
-            // si on est au debut de la game
-            //if (playerHands.Count == 1){
-                // Donne les cartes si il en manque
-                if (playerHands[0].lst_cards.Count < 2){
-                    shootCard(playerHands[0]);
-                    return;
-                }
-                if (playerHands.Count > 1){
-                    if (playerHands[1].lst_cards.Count < 2){
-                        shootCard(playerHands[1]);
-                        return;  
-                    }
-                }
-                if (playerHands.Count > 2){
-                    if (playerHands[2].lst_cards.Count < 2){
-                        shootCard(playerHands[2]);
-                        return;  
-                    }
-                }
 
-                if (dealerHand.lst_cards.Count < 1){
-                    shootCard(dealerHand);
+            if (playerHands[0].lst_cards.Count < 2)
+            {
+                shootCard(playerHands[0]);
+                return;
+            }
+            if (playerHands.Count > 1)
+            {
+                if (playerHands[1].lst_cards.Count < 2)
+                {
+                    shootCard(playerHands[1]);
                     return;
                 }
-                turnState = State.game;  
-            //}   
-            
+            }
+            if (playerHands.Count > 2)
+            {
+                if (playerHands[2].lst_cards.Count < 2)
+                {
+                    shootCard(playerHands[2]);
+                    return;
+                }
+            }
+
+            if (dealerHand.lst_cards.Count < 1)
+            {
+                shootCard(dealerHand);
+                return;
+            }
+            turnState = State.game;
         }
 
         public void giveDealerEndCard(){
@@ -375,7 +376,7 @@ namespace GCMonogame
             }
 
             // Update Game buttons
-            if (!is_movingCard && turnState != State.endGame && turnState != State.placeBet){
+            if (!is_movingCard && turnState == State.game){
                 buttonHit.Update(gameTime);
                 buttonStand.Update(gameTime);
                 buttonSplit.setDrawColor(Color.White);
