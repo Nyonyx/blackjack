@@ -39,12 +39,16 @@ namespace GCMonogame
             vx = pVx;
             vy = pVy;
         }
+        public void setPosition(Vector2 pVector){
+            Position = pVector;
+            realign();
+     
+        }
         public void update(GameTime pGameTime){
             Position = new Vector2(Position.X + vx, Position.Y + vy);
         }
 
-        public void addCardToHand(Card c){
-            lst_cards.Add(c);
+        private void realign(){
             float centerX = (lst_cards.Count*180)/2;
             for (int i = 0; i < lst_cards.Count; i++)
             {
@@ -52,9 +56,21 @@ namespace GCMonogame
                 card.setPosition(new Vector2(((i*180)) - centerX,
                 - (238/2)));
             }
-            calculNextPosition();
+            calculNextPosition();       
+        }
+
+        public void addCardToHand(Card c){
+            lst_cards.Add(c);
+            realign();
             score = examine();
         }
+
+        public void removeLastCard(){
+            lst_cards.RemoveAt(lst_cards.Count-1);
+            realign();
+            score = examine();
+        }
+
 
         private void calculNextPosition(){
             Card last = lst_cards[lst_cards.Count-1];

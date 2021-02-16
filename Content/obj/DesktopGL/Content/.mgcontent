@@ -59,11 +59,13 @@
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/UI/button1.png</File>
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/UI/button2.png</File>
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/UI/coinIcon.png</File>
+    <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/UI/hand.png</File>
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/UI/settingsBtn.png</File>
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/UI/slider2.png</File>
     <File>/Users/brunopierrebouchard/Desktop/BlackJack Master project/BlackJackMaster/Content/UI/starIcon.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

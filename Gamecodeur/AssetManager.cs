@@ -28,6 +28,7 @@ namespace Gamecodeur
         public static Texture2D settingsBtn;
         public static Texture2D starIcon;
         public static Texture2D coinIcon;
+        public static Texture2D handIcon;
 
         //slider
         public static Texture2D slider;
@@ -49,6 +50,7 @@ namespace Gamecodeur
             coinIcon = pContent.Load<Texture2D>("UI/coinIcon");
             slider = pContent.Load<Texture2D>("UI/slider2");
             borderCircle = pContent.Load<Texture2D>("UI/borderCircle");
+            handIcon = pContent.Load<Texture2D>("UI/hand");
 
 
             for (int i = 0; i < table.Length; i++)
