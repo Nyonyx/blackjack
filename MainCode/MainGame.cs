@@ -364,52 +364,51 @@ namespace GCMonogame
             
             dealerHand.update(gameTime);
 
+            // Update button states
+            buttonBet.setActive(false);
+            buttonContinue.setActive(false);
+            buttonHit.setActive(false);
+            buttonStand.setActive(false);
+            buttonSplit.setActive(false);
+            buttonDouble.setActive(false);
+            buttonTable.setActive(false);
+            buttonLeather.setActive(false);
+            buttonBackground.setActive(false);
+
             if (turnState == State.placeBet){
                 sliderBet.Update(gameTime);
-                buttonBet.Update(gameTime);
-            }
-
-            if (settingsOn){
-                buttonTable.Update(gameTime);
-                buttonLeather.Update(gameTime);
-                buttonBackground.Update(gameTime);  
-            }
-
-            // Update Game buttons
-            if (!is_movingCard && turnState == State.game){
-                buttonHit.Update(gameTime);
-                buttonStand.Update(gameTime);
-                buttonSplit.setDrawColor(Color.White);
-                buttonStand.setDrawColor(Color.White);
-
-                if (playerHands.Count < 3 && playerHands[currentHandIndex].lst_cards.Count == 2){
-                    buttonSplit.Update(gameTime);
-                    buttonSplit.setDrawColor(Color.White);
-                }else{
-                    buttonSplit.setDrawColor(Color.Gray);
-                }
-                
-
-                if (can_double){
-                    buttonDouble.Update(gameTime);
-                    buttonDouble.setDrawColor(Color.White);
-                }else{
-                    buttonDouble.setDrawColor(Color.Gray);
-                }
-
-  
-                
-                buttonHit.setDrawColor(Color.White);
-                
-            }else{
-                buttonHit.setDrawColor(Color.Gray);
-                buttonStand.setDrawColor(Color.Gray);
-                buttonDouble.setDrawColor(Color.Gray);
-                buttonSplit.setDrawColor(Color.Gray);
+                buttonBet.setActive(true);
             }
             if (turnState == State.endGame){
-                buttonContinue.Update(gameTime);
+                buttonContinue.setActive(true);
             }
+
+            if (!is_movingCard && turnState == State.game){
+                buttonHit.setActive(true);
+                buttonStand.setActive(true);
+                if (playerHands.Count < 3 && playerHands[currentHandIndex].lst_cards.Count == 2){
+                    buttonSplit.setActive(true);
+                }
+                if (can_double){
+                    buttonDouble.setActive(true);
+                }                 
+            }
+            if (settingsOn){
+                buttonTable.setActive(true);
+                buttonLeather.setActive(true);
+                buttonBackground.setActive(true);
+            }
+            // Update Game buttons
+            buttonTable.Update(gameTime);
+            buttonLeather.Update(gameTime);
+            buttonBackground.Update(gameTime);  
+
+            buttonBet.Update(gameTime);
+            buttonHit.Update(gameTime);
+            buttonStand.Update(gameTime);
+            buttonSplit.Update(gameTime);
+            buttonDouble.Update(gameTime);
+            buttonContinue.Update(gameTime);
             buttonSettings.Update(gameTime);
 
             // Update moving card

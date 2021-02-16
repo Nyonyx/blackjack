@@ -22,7 +22,7 @@ namespace Gamecodeur{
         public Rectangle BoudingBox;
         public Vector2 origin;
         private Vector2 scaling;
-        private Color drawColor;
+        private bool can_use {get ; set ;}
 
         public Button(Texture2D pTexture,Texture2D pTexturePressed,string pLabel,Vector2 pPosition,Vector2 pOrigin,Vector2 pScaling,OnClick pOnClick){
             texture = pTexture;
@@ -36,41 +36,43 @@ namespace Gamecodeur{
             BoudingBox = new Rectangle((int)(Position.X-(origin.X*scaling.X)),
             (int)(Position.Y-(origin.Y*scaling.Y)),(int)(texture.Width*scaling.X),
             (int)(texture.Height*scaling.Y));
-            drawColor = Color.White;
+            can_use = true;
+        }
+
+        public void setActive(bool pActive){
+            can_use = pActive;
         }
 
         public void setIcon(Sprite pIcon){
             icon = pIcon;
         }
-        public void setDrawColor(Color pColor){
-            drawColor = pColor;
-        }
 
         public void Update(GameTime pGameTime){
+            if (can_use){
+                MouseState newMouseState = Mouse.GetState();
+                Point MousePos = newMouseState.Position;
 
-            MouseState newMouseState = Mouse.GetState();
-            Point MousePos = newMouseState.Position;
-
-            if (BoudingBox.Contains(MousePos)){
-                if (!isHover){
-                    isHover = true;
+                if (BoudingBox.Contains(MousePos)){
+                    if (!isHover){
+                        isHover = true;
+                    }
+                }else {
+                    isHover = false;
                 }
-            }else {
-                isHover = false;
-            }
-            currentTexture = texture;
-            if (isHover){
-                if (newMouseState.LeftButton == ButtonState.Pressed &&
-                 oldMouseState.LeftButton == ButtonState.Released){
-                    if (onClick != null){
-                        onClick(this);
+                currentTexture = texture;
+                if (isHover){
+                    if (newMouseState.LeftButton == ButtonState.Pressed &&
+                    oldMouseState.LeftButton == ButtonState.Released){
+                        if (onClick != null){
+                            onClick(this);
+                        }
+                    }
+                    if (newMouseState.LeftButton == ButtonState.Pressed){
+                        currentTexture = texturePressed;
                     }
                 }
-                if (newMouseState.LeftButton == ButtonState.Pressed){
-                    currentTexture = texturePressed;
-                }
+                oldMouseState = newMouseState;
             }
-            oldMouseState = newMouseState;
         }
 
         public void Draw(SpriteBatch pSpriteBatch)
@@ -81,6 +83,9 @@ namespace Gamecodeur{
             }else{
                 press = new Vector2(0,(texture.Height*scaling.Y)/10);
             }
+
+            Color drawColor = Color.White;
+            if (!can_use){drawColor = Color.DarkGray;}
 
             pSpriteBatch.Draw(currentTexture,Position+press,null,drawColor,0,origin,scaling,SpriteEffects.None,1);
             Vector2 size = AssetManager.MainFont.MeasureString(label);
